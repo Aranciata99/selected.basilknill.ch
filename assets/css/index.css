@@ -1,0 +1,289 @@
+@font-face {
+    font-family: 'EduROM-Medium';
+    src: url('fonts/EduROM-Medium.woff') format('woff');
+}
+
+html,
+body {
+    overscroll-behavior: none;
+    height: 100%;
+    margin: 0;
+    overflow: auto;
+    scrollbar-width: none;
+    background-color: black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+* {
+    font-family: 'EduROM-Medium';
+    font-weight: normal;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    scrollbar-width: none;
+}
+
+:root {
+    --hoverSpeed: 0.8s;
+    --gridSize: 25px;
+    --buttonBorderSize: 2px;
+    --fixedGridSize: 25px;
+}
+
+/**/
+/* Typographie */
+/**/
+
+p,
+h1,
+ul,
+li {
+    color: white;
+    font-size: 1.5rem;
+    text-align: left;
+    line-height: 1.2;
+}
+
+/* Teletext */
+
+h2,
+h2 a {
+    color: black;
+    font-size: 1.25rem;
+    line-height: 0;
+    text-align: center;
+}
+
+ul,
+li {
+    list-style: none;
+    padding-left: 0;
+}
+
+.small,
+small {
+    color: white;
+    font-size: clamp(0.7rem, 3.5vw, 1rem);
+    text-align: left;
+    line-height: auto;
+}
+
+.link,
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.link:hover,
+h2 a:hover {
+    font-style: italic;
+    text-decoration: none;
+}
+
+p a:hover {
+    font-style: italic;
+}
+
+/**/
+/* Buttons */
+/**/
+
+.buttonBlackA,
+.buttonBlackB,
+.buttonWhiteA,
+.buttonWhiteB {
+    position: relative;
+    width: auto;
+    height: calc(var(--fixedGridSize)/5*4);
+    border-radius: 25px;
+    padding-inline: 10px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    line-height: 0;
+    padding-top: 2px;
+    margin-right: calc(var(--fixedGridSize)/6);
+
+}
+
+.buttonBlackA {
+    color: white;
+    border: solid black var(--buttonBorderSize);
+    background-color: black;
+}
+
+.buttonBlackB {
+    color: white;
+    border: solid white var(--buttonBorderSize);
+    background-color: black;
+
+}
+
+.buttonWhiteA {
+    color: black;
+    border: solid white var(--buttonBorderSize);
+    background-color: white;
+}
+
+.buttonWhiteB {
+    color: black;
+    border: solid black var(--buttonBorderSize);
+    background-color: white;
+}
+
+.buttonWhiteB.active {
+    color: white;
+    border: solid white var(--buttonBorderSize);
+    background-color: black;
+}
+
+.buttonBlackA.clicked {
+    color: black;
+    border: solid black var(--buttonBorderSize);
+    background-color: white;
+}
+
+.buttonBlackA:hover,
+.buttonBlackB:hover,
+.buttonWhiteA:hover,
+.buttonWhiteB:hover {
+    padding-inline: 15px;
+    cursor: pointer;
+}
+
+input {
+    -webkit-appearance: none;
+    background: transparent;
+    background-color: black;
+    height: var(--buttonBorderSize);
+}
+
+input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: var(--buttonBorderSize) solid black;
+    height: calc(var(--fixedGridSize)/5*3);
+    width: calc(var(--fixedGridSize)/5*3);
+    border-radius: 100px;
+    background: white;
+    cursor: pointer;
+}
+
+/* All the same stuff for Firefox */
+input::-moz-range-thumb {
+    border: var(--buttonBorderSize) solid black;
+    height: calc(var(--fixedGridSize)/5*3);
+    width: calc(var(--fixedGridSize)/5*3);
+    border-radius: 100px;
+    background: white;
+    cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input::-ms-thumb {
+    border: var(--buttonBorderSize) solid black;
+    height: calc(var(--fixedGridSize)/5*3);
+    width: calc(var(--fixedGridSize)/5*3);
+    border-radius: 100px;
+    background: white;
+    cursor: pointer;
+}
+
+/* Site */
+
+.buttonContainer{
+    margin: var(--gridSize);
+    line-height: 2;    
+}
+
+.genreContainer{
+    padding-bottom: calc(var(--gridSize)*1.5);
+}
+
+.small{
+    line-height: 1.2;
+    margin-bottom: calc(var(--gridSize)/2);
+}
+
+
+@media (max-width: 900px) {
+
+    :root {
+        --gridSize: 15px;
+    }
+
+    /*hover*/
+
+    .link:hover,
+    h2 a:hover {
+        font-style: normal;
+        text-decoration: none;
+    }
+
+    p a:hover {
+        font-style: normal;
+    }
+
+    .buttonBlackA:hover,
+    .buttonBlackB:hover,
+    .buttonWhiteA:hover,
+    .buttonWhiteB:hover {
+        padding-inline: 10px;
+    }
+
+    /* TicTacToe */
+
+    .tttDisplayPlayerOne,
+    .tttDisplayPlayerTwo {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        height: 50%;
+        width: 100%;
+        top: 12%;
+        left: 0;
+        text-align: center;
+    }
+
+    .tttDisplayPlayerTwo {
+        top: 80%;
+        right: 0;
+        text-align: center;
+    }
+
+    .tttDisplayCount small {
+        color: black;
+        text-align: center;
+        line-height: 3;
+    }
+
+    .tttDisplayCount p {
+        color: black;
+        text-align: center;
+        line-height: 0;
+    }
+
+}
