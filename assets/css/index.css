@@ -217,7 +217,8 @@ input::-ms-thumb {
 
 .buttonContainer{
     margin: var(--gridSize);
-    line-height: 2;    
+    line-height: 2;
+    z-index: 100;
 }
 
 .genreContainer{
@@ -227,6 +228,23 @@ input::-ms-thumb {
 .small{
     line-height: 1.2;
     margin-bottom: calc(var(--gridSize)/2);
+}
+
+.imageContainer {
+    z-index: 0;
+
+}
+
+.imageBox{
+    position: absolute;
+    width: 40vmin;
+    height: 40vmin;
+}
+
+.imageBox img{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
 }
 
 
