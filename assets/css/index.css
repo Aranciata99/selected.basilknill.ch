@@ -8,7 +8,7 @@ body {
     overscroll-behavior: none;
     height: 100%;
     margin: 0;
-    overflow: auto;
+    overflow: hidden;
     scrollbar-width: none;
     background-color: black;
     -webkit-touch-callout: none;
@@ -215,35 +215,42 @@ input::-ms-thumb {
 
 /* Site */
 
-.buttonContainer{
+.buttonContainer {
+    position: relative;
     margin: var(--gridSize);
     line-height: 2;
-    z-index: 100;
+    z-index: 9999;
 }
 
-.genreContainer{
+.genreContainer {
     padding-bottom: calc(var(--gridSize)*1.5);
 }
 
-.small{
+.small {
     line-height: 1.2;
     margin-bottom: calc(var(--gridSize)/2);
 }
 
 .imageContainer {
+    position: absolute;
     z-index: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 
 }
 
-.imageBox{
+.imageBox {
     position: absolute;
+    top: 0;
     width: 40vmin;
     height: 40vmin;
 }
 
-.imageBox img{
-    height: 100%;
-    width: auto;
+.imageBox img {
+    height: auto;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -273,35 +280,13 @@ input::-ms-thumb {
         padding-inline: 10px;
     }
 
-    /* TicTacToe */
-
-    .tttDisplayPlayerOne,
-    .tttDisplayPlayerTwo {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        height: 50%;
+    .imageBox {
         width: 100%;
-        top: 12%;
-        left: 0;
-        text-align: center;
+        height: 100%;
     }
 
-    .tttDisplayPlayerTwo {
-        top: 80%;
-        right: 0;
-        text-align: center;
-    }
-
-    .tttDisplayCount small {
-        color: black;
-        text-align: center;
-        line-height: 3;
-    }
-
-    .tttDisplayCount p {
-        color: black;
-        text-align: center;
-        line-height: 0;
+    .imageBox img {
+        height: 100%;
     }
 
 }
