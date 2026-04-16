@@ -1,3 +1,23 @@
+<!-- 
+ 
+Web
+– Bildschirm irgendwie ganz füllen –> Raster grid oder flex
+
+Mobile
+– slideshow on click && on slide: bild darüberschieben
+
+– Links zu meiner Seite, Links zum Projekt direkt
+
+– Responsiv click etc
+– Titel lesbar? In einen Button?
+– OnLoad Gif like durchgehen (Video Rückblicke ZHDK?)
+– Weitere Buttons und Links zur website
+
+– Beschriebe?? 
+– Link testen fallback from basilknill.ch
+
+-->
+
     <!DOCTYPE html>
     <html lang="en">
 
@@ -20,6 +40,7 @@
     <body>
 
         <div class="buttonContainer">
+
             <?php
 
             $genreFiles = glob("content/*", GLOB_ONLYDIR);
@@ -57,13 +78,16 @@
 
             foreach ($projectPaths as $path) {
                 $imageNames = glob("$path/*");
+
+                $id = 0;
                 
                 echo "<div class='genreImageContainer'>";
                 
                 foreach ($imageNames as $img) {
-                    echo "<div class='imageBox'>
+                    echo "<div class='imageBox' id='imageBox$id'>
                 <img src='$img' alt=''>
                 </div>";
+                $id++;
                 }
 
                 echo "</div>";

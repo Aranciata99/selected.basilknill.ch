@@ -235,7 +235,6 @@ input::-ms-thumb {
     position: absolute;
     z-index: 0;
     top: 0;
-    left: 0;
     height: 100%;
     width: 100%;
 
@@ -243,14 +242,25 @@ input::-ms-thumb {
 
 .imageBox {
     position: absolute;
-    top: 0;
-    width: 40vmin;
-    height: 40vmin;
+    height: 100px;
+    left: 300px;
+    right: auto;
 }
 
+#imageBox0 {
+    position: absolute;
+    height: 100%;
+    max-width: 50%;
+    left: auto;
+    right: 0;
+    background-color: red;
+}
+
+
 .imageBox img {
-    height: auto;
-    width: 100%;
+    position: relative;
+    height: 100%;
+    width: auto;
     object-fit: cover;
 }
 

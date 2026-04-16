@@ -1,22 +1,3 @@
-/*
-
-Web
-– Bildschirm irgendwie ganz füllen –> Raster grid oder flex
-
-Mobile
-– slideshow on click && on slide: bild darüberschieben
-
-– Links zu meiner Seite, Links zum Projekt direkt
-
-– Responsiv click etc
-– Titel lesbar? In einen Button?
-– OnLoad Gif like durchgehen
-– Weitere Buttons und Links zur website
-
-– Beschriebe??
-
-*/
-
 //Buttons
 const projectButtons = document.querySelectorAll(".buttonContainer button");
 
@@ -24,9 +5,10 @@ const projectButtons = document.querySelectorAll(".buttonContainer button");
 const genreImageContainer = document.querySelectorAll(".genreImageContainer");
 const imageContainers = document.querySelectorAll(".imageBox");
 
-let imageContainerSize = imageContainers[0].getBoundingClientRect().width;
-
+let imageContainerWidth = imageContainers[0].getBoundingClientRect().width;
+let imageContainerHeight = imageContainers[0].getBoundingClientRect().height;
 let margin = 25;
+let displayStyle = "block";
 
 //Random Number
 function getRandomArbitrary(min, max) {
@@ -41,16 +23,16 @@ projectButtons.forEach((button, index) => {
         if (lastButton == -1) {
             button.classList.toggle("buttonBlackB");
             button.classList.toggle("buttonWhiteA");
-            genreImageContainer[index].style.display = genreImageContainer[index].style.display === "block" ? "none" : "block";
+            genreImageContainer[index].style.display = genreImageContainer[index].style.display === displayStyle ? "none" : displayStyle;
             lastButton = index;
         } else {
             projectButtons[lastButton].classList.toggle("buttonBlackB");
             projectButtons[lastButton].classList.toggle("buttonWhiteA");
             genreImageContainer[lastButton].style.display = "none";
             projectButtons[index].classList.toggle("buttonBlackB");
-            projectButtons[index].classList.toggle("buttonWhiteA");   
+            projectButtons[index].classList.toggle("buttonWhiteA");
             lastButton = index;
-            genreImageContainer[index].style.display = genreImageContainer[index].style.display === "block" ? "none" : "block";
+            genreImageContainer[index].style.display = genreImageContainer[index].style.display === displayStyle ? "none" : displayStyle;
         }
     });
 });
@@ -71,13 +53,21 @@ genreImageContainer.forEach(genre => {
 
 let imageOffsetX;
 let imageOffsetY;
+let coverImage;
 
 if (window.innerWidth > 900) {
-    imageContainers.forEach(image => {
-        imageOffsetX = getRandomArbitrary(0, window.innerWidth - imageContainerSize);
-        imageOffsetY = getRandomArbitrary(0, window.innerHeight - imageContainerSize);
-        image.style.left = imageOffsetX + "px";
-        image.style.top = imageOffsetY + "px";
+    genreImageContainer.forEach(genre => {
+        boxArray = Array.from(genre.children);
+        boxArray.forEach((box, index) => {
+            if (index != 0) {
+                imageWidth = box.getBoundingClientRect().width;
+                imageHeight = box.getBoundingClientRect().height;
+                imageOffsetX = getRandomArbitrary(300, window.innerWidth/2);
+                imageOffsetY = getRandomArbitrary(100, window.innerHeight - 100);
+                box.style.left = imageOffsetX + "px";
+                box.style.top = imageOffsetY + "px";
+            }
+        });
     });
 } else {
 
