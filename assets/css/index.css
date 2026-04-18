@@ -220,6 +220,7 @@ input::-ms-thumb {
     margin: var(--gridSize);
     line-height: 2;
     z-index: 9999;
+    display: none;
 }
 
 .genreContainer {
@@ -233,34 +234,38 @@ input::-ms-thumb {
 
 .imageContainer {
     position: absolute;
+    white-space: nowrap;
+    overflow-y: none;
     z-index: 0;
     top: 0;
     height: 100%;
     width: 100%;
+}
 
+.genreImageContainer {
+    position: relative;
+    overscroll-behavior: none;
+    overflow-x: auto;
+    overflow-y: none;
+    height: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    background-color: black;
+    scrollbar-width: none;
+    transition: 0.4s ease;
 }
 
 .imageBox {
-    position: absolute;
-    height: 100px;
-    left: 300px;
-    right: auto;
+    position: relative;
+    /* display: inline-block; */
+    height: 99%;
+    width: 100%;
 }
-
-#imageBox0 {
-    position: absolute;
-    height: 100%;
-    max-width: 50%;
-    left: auto;
-    right: 0;
-    background-color: red;
-}
-
 
 .imageBox img {
     position: relative;
+    width: 100%;
     height: 100%;
-    width: auto;
     object-fit: cover;
 }
 
@@ -290,12 +295,36 @@ input::-ms-thumb {
         padding-inline: 10px;
     }
 
-    .imageBox {
-        width: 100%;
+    .imageContainer {
+        position: absolute;
+        white-space: nowrap;
+        z-index: 0;
+        top: 0;
         height: 100%;
+        width: 100%;
+    }
+
+    .genreImageContainer {
+        position: relative;
+        overscroll-behavior: none;
+        display: block;
+        white-space: auto;
+        overflow-x: none;
+        overflow-y: auto;
+        height: 12.5%;
+        width: 100%;
+    }
+
+    .imageBox {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: auto;
     }
 
     .imageBox img {
+        position: relative;
+        width: 100%;
         height: 100%;
     }
 

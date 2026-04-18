@@ -45,6 +45,7 @@ Mobile
 
             $genreFiles = glob("content/*", GLOB_ONLYDIR);
             $projectPaths = array();
+            $projectNames = array();
 
             foreach ($genreFiles as $genre) {
 
@@ -63,6 +64,7 @@ Mobile
                     $projectNameAbs = $projectName;
                     $projectName = substr($projectName, 3);
                     array_push($projectPaths, $project);
+                    array_push($projectNames, $projectName);
                     echo "<button class='buttonBlackB'>$projectName</button> <br>";
                 }
 
@@ -76,7 +78,7 @@ Mobile
 
             <?php
 
-            foreach ($projectPaths as $path) {
+            foreach ($projectPaths as $index => $path) {
                 $imageNames = glob("$path/*");
 
                 $id = 0;
@@ -84,7 +86,7 @@ Mobile
                 echo "<div class='genreImageContainer'>";
                 
                 foreach ($imageNames as $img) {
-                    echo "<div class='imageBox' id='imageBox$id'>
+                    echo "<div class='imageBox' id='$projectNames[$index] $id'>
                 <img src='$img' alt=''>
                 </div>";
                 $id++;
