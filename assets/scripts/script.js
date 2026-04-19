@@ -7,14 +7,14 @@ const imageContainers = document.querySelectorAll(".imageBox");
 
 let imageContainerWidth = imageContainers[0].getBoundingClientRect().width;
 let imageContainerHeight = imageContainers[0].getBoundingClientRect().height;
-let margin = 25;
+let marginCoverlayout = 5;
 let displayStyle = "block";
 
 //Sizes 
 let projectAmmounts = 8; //Dynamisch !
-closedSize = window.innerWidth / projectAmmounts
+closedSize = window.innerWidth / projectAmmounts - marginCoverlayout + 1;
 squisedSize = 50;
-activeSize = window.innerWidth - squisedSize * (projectAmmounts - 1);
+activeSize = window.innerWidth - squisedSize * (projectAmmounts - 0.3);
 
 //Random Number
 function getRandomArbitrary(min, max) {
@@ -51,21 +51,49 @@ let lastButton = -1;
 //     });
 // });
 
-//Images
-
-//setImages
+//setup Image Layout
 
 genreImageContainer.forEach((container, i) => {
-    container.style.width = closedSize + "px";
-    container.addEventListener("click", function () {
-        container.style.width = activeSize + "px";
+    boxArray = Array.from(container.children);
+    boxArray.forEach((box, index) => {
+        if (index != 0) {
+            box.style.top = getRandomArbitrary(-18, -2) + "%";
+        }
+
+    });
+
+});
+
+//Inputs
+
+genreImageContainer.forEach((container, i) => {
+    container.addEventListener("mouseover", function () {
         genreImageContainer.forEach((container, c) => {
             if (c != i) {
                 container.style.width = squisedSize + "px";
+                container.scrollTo({
+                    left: 0,
+                    behavior: "smooth"
+                });
             }
         });
         container.style.width = activeSize + "px";
     });
+
+    // container.addEventListener("click", function () {
+    //     if (container.style.width == activeSize + "px") {
+    //         genreImageContainer.forEach((container, c) => {
+    //             container.style.width = closedSize + "px";
+    //         });
+    //     } else {
+    //         genreImageContainer.forEach((container, c) => {
+    //             if (c != i) {
+    //                 container.style.width = squisedSize + "px";
+    //             }
+    //         });
+    //         container.style.width = activeSize + "px";
+    //     }
+    // });
 
 });
 

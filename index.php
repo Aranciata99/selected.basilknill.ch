@@ -86,7 +86,7 @@ Mobile
                 echo "<div class='genreImageContainer'>";
                 
                 foreach ($imageNames as $img) {
-                    echo "<div class='imageBox' id='$projectNames[$index] $id'>
+                    echo "<div class='imageBox' id='imageBox$id'>
                 <img src='$img' alt=''>
                 </div>";
                 $id++;
