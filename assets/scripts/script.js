@@ -1,5 +1,35 @@
+
+/* 
+
+Generell
+
+– Links zu seiten
+
+Desktop
+
+– Besser  dass es rechts nicht black wird
+– Info Button:
+    – container.getBoundingClientRect.right);
+– ProjectInfo?
+
+Mobile
+
+– Responsive
+
+Generell
+
+– Links testen + fallback from basilknill.ch/pages
+
+
+*/
+
+
 //Buttons
 const projectButtons = document.querySelectorAll(".buttonContainer button");
+const projectButtonsContainer = document.querySelectorAll(".buttonContainer");
+
+//console.log(infoButton);
+
 
 //Images
 const genreImageContainer = document.querySelectorAll(".genreImageContainer");
@@ -11,7 +41,7 @@ let marginCoverlayout = 5;
 let displayStyle = "block";
 
 //Sizes 
-let projectAmmounts = 8; //Dynamisch !
+let projectAmmounts = genreImageContainer.length;
 closedSize = window.innerWidth / projectAmmounts - marginCoverlayout + 1;
 squisedSize = 50;
 activeSize = window.innerWidth - squisedSize * (projectAmmounts - 0.3);
@@ -21,45 +51,23 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-//Setup
-
-genreImageContainer.forEach((container, index) => {
-    container.style.width = closedSize + "px";
-});
-
-
-
-let lastButton = -1;
-
-//Buttons
-// projectButtons.forEach((button, index) => {
-//     button.addEventListener("mouseover", function () {
-//         // if (lastButton == -1) {
-//         //     button.classList.toggle("buttonBlackB");
-//         //     button.classList.toggle("buttonWhiteA");
-//         //     genreImageContainer[index].style.display = genreImageContainer[index].style.display === displayStyle ? "none" : displayStyle;
-//         //     lastButton = index;
-//         // } else {
-//         //     projectButtons[lastButton].classList.toggle("buttonBlackB");
-//         //     projectButtons[lastButton].classList.toggle("buttonWhiteA");
-//         //     genreImageContainer[lastButton].style.display = "none";
-//         //     projectButtons[index].classList.toggle("buttonBlackB");
-//         //     projectButtons[index].classList.toggle("buttonWhiteA");
-//         //     lastButton = index;
-//         //     genreImageContainer[index].style.display = genreImageContainer[index].style.display === displayStyle ? "none" : displayStyle;
-//         // }
-//     });
-// });
+//Status
+let showAll = true;
 
 //setup Image Layout
 
 genreImageContainer.forEach((container, i) => {
+    container.style.overflow = "hidden"; //ACHTUNG MOBILE!
+    container.style.width = closedSize + "px";
     boxArray = Array.from(container.children);
     boxArray.forEach((box, index) => {
         if (index != 0) {
             box.style.top = getRandomArbitrary(-18, -2) + "%";
         }
-
+    });
+    projectButtonsContainer.forEach(btnBox => {
+        btnBox.style.top = "auto";
+        btnBox.style.bottom = 25 + "px";
     });
 
 });
@@ -68,17 +76,68 @@ genreImageContainer.forEach((container, i) => {
 
 genreImageContainer.forEach((container, i) => {
     container.addEventListener("mouseover", function () {
-        genreImageContainer.forEach((container, c) => {
-            if (c != i) {
-                container.style.width = squisedSize + "px";
-                container.scrollTo({
-                    left: 0,
-                    behavior: "smooth"
-                });
-            }
-        });
-        container.style.width = activeSize + "px";
+        if (!showAll) {
+            genreImageContainer.forEach((container, c) => {
+                if (c != i) {
+                    const infoBtn = document.getElementById("infoButton" + c);
+                    infoBtn.style.display = "none";
+                    container.style.width = squisedSize + "px";
+                    container.scrollTo({
+                        left: 0,
+                        behavior: "smooth"
+                    });
+                }
+            });
+            container.style.width = activeSize + "px";
+            const infoBtn = document.getElementById("infoButton" + i);
+            infoBtn.style.display = "inline-block";
+
+            container.addEventListener("wheel", function (event) {
+                handleScroll(event, i);
+            });
+        }
     });
+
+    container.addEventListener("mouseleave", function () {
+        if (showAll) {
+            showAll = false;
+        }
+    });
+
+    container.addEventListener("click", function () {
+        if (!showAll) {
+            showAll = true;
+            genreImageContainer.forEach((container, c) => {
+                container.style.width = closedSize + "px";
+                const infoBtn = document.getElementById("infoButton" + c);
+                infoBtn.style.display = "none";
+            });
+        } else {
+            showAll = false;
+            genreImageContainer.forEach((container, c) => {
+                if (c != i) {
+                    container.scrollTo({
+                        left: 0,
+                        behavior: "smooth"
+                    });
+                    container.style.width = squisedSize + "px";
+                    const infoBtn = document.getElementById("infoButton" + i);
+                    infoBtn.style.display = "inline-block";
+                }
+            });
+            container.style.width = activeSize + "px";
+        }
+    });
+
+    //Horizontal scroll
+
+    function handleScroll(event, i) {
+        event.preventDefault();
+        if (window.innerWidth >= 900 && !showAll) {
+            genreImageContainer[i].scrollLeft += event.deltaY + event.deltaX;
+        }
+    }
+
 
     // container.addEventListener("click", function () {
     //     if (container.style.width == activeSize + "px") {

@@ -160,6 +160,15 @@ p a:hover {
     cursor: pointer;
 }
 
+#genreButton {
+    cursor: auto;
+}
+
+#genreButton:hover {
+    padding-inline: 10px;
+    cursor: auto;
+}
+
 input {
     -webkit-appearance: none;
     background: transparent;
@@ -215,21 +224,30 @@ input::-ms-thumb {
 
 /* Site */
 
-.buttonContainer {
-    position: relative;
-    margin: var(--gridSize);
-    line-height: 2;
+.header {
+    position: fixed;
+    padding-top: var(--gridSize);
+    padding-bottom: var(--gridSize);
+    padding-inline: var(--gridSize);
+    top: 0;
+    left: 0;
+    line-height: 1.5;
     z-index: 9999;
-    display: none;
+}
+
+.buttonContainer {
+    position: absolute;
+    padding-inline: var(--gridSize);
+    z-index: 9999;
+    width: calc(100% - var(--gridSize)* 3);
 }
 
 .genreContainer {
-    padding-bottom: calc(var(--gridSize)*1.5);
+
 }
 
 .small {
-    line-height: 1.2;
-    margin-bottom: calc(var(--gridSize)/2);
+
 }
 
 .imageContainer {
@@ -276,7 +294,7 @@ input::-ms-thumb {
     position: relative;
     display: inline-block;
     margin-inline: 0;
-    height: 99%;
+    height: 100%;
     top: 0;
     /* width: 100%; */
     z-index: 100;
