@@ -1,25 +1,20 @@
 
 /* 
 
-Generell
-
-– Links zu seiten
-
-Desktop
-
-– Besser  dass es rechts nicht black wird
-– Info Button:
-    – container.getBoundingClientRect.right);
-– ProjectInfo?
-
 Mobile
 
+– Resize
 – Responsive
 
-Generell
+Weiter
 
 – Links testen + fallback from basilknill.ch/pages
+– CV PDF
+– Alle Bilder aller Projekte
 
+Zusatz 
+
+– Besser dass es rechts nicht black wird?
 
 */
 
@@ -27,6 +22,7 @@ Generell
 //Buttons
 const projectButtons = document.querySelectorAll(".buttonContainer button");
 const projectButtonsContainer = document.querySelectorAll(".buttonContainer");
+const infoButton = document.querySelectorAll(".infoButton button");
 
 //console.log(infoButton);
 
@@ -68,8 +64,8 @@ genreImageContainer.forEach((container, i) => {
     projectButtonsContainer.forEach(btnBox => {
         btnBox.style.top = "auto";
         btnBox.style.bottom = 25 + "px";
+        projectButtonsContainer[i].style.opacity = 0;
     });
-
 });
 
 //Inputs
@@ -79,18 +75,20 @@ genreImageContainer.forEach((container, i) => {
         if (!showAll) {
             genreImageContainer.forEach((container, c) => {
                 if (c != i) {
-                    const infoBtn = document.getElementById("infoButton" + c);
-                    infoBtn.style.display = "none";
                     container.style.width = squisedSize + "px";
+                    projectButtonsContainer[c].style.opacity = 0;
+                    infoButton[c].style.display = "none";
                     container.scrollTo({
                         left: 0,
                         behavior: "smooth"
                     });
+                } else {
+                    projectButtonsContainer[i].style.opacity = 1;
+                    infoButton[i].style.display = "block";
                 }
             });
             container.style.width = activeSize + "px";
-            const infoBtn = document.getElementById("infoButton" + i);
-            infoBtn.style.display = "inline-block";
+            infoButton[i].style.left = (activeSize / 2) + (squisedSize * i) + "px";
 
             container.addEventListener("wheel", function (event) {
                 handleScroll(event, i);
@@ -109,8 +107,7 @@ genreImageContainer.forEach((container, i) => {
             showAll = true;
             genreImageContainer.forEach((container, c) => {
                 container.style.width = closedSize + "px";
-                const infoBtn = document.getElementById("infoButton" + c);
-                infoBtn.style.display = "none";
+                projectButtonsContainer[i].style.opacity = 0;
             });
         } else {
             showAll = false;
@@ -121,8 +118,8 @@ genreImageContainer.forEach((container, i) => {
                         behavior: "smooth"
                     });
                     container.style.width = squisedSize + "px";
-                    const infoBtn = document.getElementById("infoButton" + i);
-                    infoBtn.style.display = "inline-block";
+                } else {
+                    projectButtonsContainer[i].style.opacity = 1;
                 }
             });
             container.style.width = activeSize + "px";

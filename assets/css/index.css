@@ -231,7 +231,7 @@ input::-ms-thumb {
     padding-inline: var(--gridSize);
     top: 0;
     left: 0;
-    line-height: 1.5;
+    line-height: 1.7;
     z-index: 9999;
 }
 
@@ -240,6 +240,8 @@ input::-ms-thumb {
     padding-inline: var(--gridSize);
     z-index: 9999;
     width: calc(100% - var(--gridSize)* 3);
+    opacity: 0;
+    transition: 0.6s ease;
 }
 
 .genreContainer {
@@ -248,6 +250,10 @@ input::-ms-thumb {
 
 .small {
 
+}
+
+.infoButton button{
+    bottom: var(--gridSize);
 }
 
 .imageContainer {
@@ -298,10 +304,6 @@ input::-ms-thumb {
     top: 0;
     /* width: 100%; */
     z-index: 100;
-}
-
-#imageBox1 {
-    margin-left: 100px;
 }
 
 #imageBox0 img {

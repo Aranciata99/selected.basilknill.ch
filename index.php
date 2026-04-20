@@ -25,7 +25,7 @@
             $contactButtons = [
                 // ["buttonBlackB", "buttonWhiteB"],
                 // ["_black", "_self"]
-                ["https://basilknill.ch/", "_blank", "buttonBlackA", "All Work – About"],
+                ["https://basilknill.ch/", "_blank", "buttonBlackA", "All Work ↗ About"],
                 ["https://basilknill.ch/about", "_blank", "buttonBlackA", "Curriculum Vitae"],
                 ["mailto:basil@knill.eu", "_blank", "buttonBlackA", "basil@knill.eu"],
                 ["tel:+41787250698", "_blank", "buttonBlackA", "078 725 06 98"],
@@ -84,40 +84,55 @@
 
                     foreach ($imageNames as $img) {
 
+                        if (basename($img) === "_link.php") continue;
+
                         $genre = basename($img);
 
                         echo "<div class='imageBox' id='imageBox$id'>
-                <img src='$img' alt=''>
-                </div>";
+                            <img src='$img' alt=''>
+                        </div>";
                         $id++;
                     }
 
                     echo "
                 <div class='buttonContainer'>
-                <a href='https://basilknill.ch/' target='_blank'>
-                        <button class='buttonBlackA'>";
+                        <button class='buttonBlackA' id='genreButton'>";
                     echo
                     strtoupper($projectName);
                     echo
-                    " ↗
-                        </button>
-                </a>
-                <button class='buttonWhiteB'id=genreButton>";
+                    "</button>
+                <button class='buttonWhiteB' id='genreButton'>";
 
-                    echo $genreName;
+                    echo strtoupper($genreName);
 
                     echo
                     "</button>
-                    <button class='buttonWhiteB' id=infoButton$id2 style='position: absolute; right: 0; display: none;';>
-                    info
-                    </button>
+                    <div class='infoButton'>";
+                    if (file_exists("$path/_link.php")) {
+                        echo
+                        "<a href='";
+                        include "$path/_link.php";
+                        echo
+                        "' target='_blank'>
+                            <button class='buttonWhiteB' style='position: fixed;'>
+                            MORE ↗
+                            </button>
+                        </a>";
+                    } else {
+                        echo
+                        "<a href='' target='_blank'>
+                            <button class='buttonWhiteB' style='position: fixed; display: none; bottom: 100%;'>
+                            MORE ↗
+                            </button>
+                        </a>";
+                    };
+                    echo
+                    "</div>
                 </div>
             </div>";
-
-                $id2++;
+                    $id2++;
                 }
             }
-
 
             ?>
 
