@@ -25,7 +25,7 @@
             $contactButtons = [
                 // ["buttonBlackB", "buttonWhiteB"],
                 // ["_black", "_self"]
-                ["https://basilknill.ch/", "_blank", "buttonBlackA", "All Work ↗ About"],
+                ["https://basilknill.ch/", "_blank", "buttonBlackA", "All Work"],
                 ["https://basilknill.ch/about", "_blank", "buttonBlackA", "Curriculum Vitae"],
                 ["mailto:basil@knill.eu", "_blank", "buttonBlackA", "basil@knill.eu"],
                 ["tel:+41787250698", "_blank", "buttonBlackA", "078 725 06 98"],
@@ -64,6 +64,7 @@
             $genreFiles = glob("content/*", GLOB_ONLYDIR);
             $projectPaths = array();
             $projectNames = array();
+            $projectLinks1 = array();
             $id2 = 0;
 
             foreach ($genreFiles as $genre) {
@@ -84,7 +85,12 @@
 
                     foreach ($imageNames as $img) {
 
-                        if (basename($img) === "_link.php") continue;
+                        if (basename($img) === "-link-page.php") {
+                            continue;
+                        }
+                        if (basename($img) === "-link-project.php") {
+                            continue;
+                        }
 
                         $genre = basename($img);
 
@@ -94,43 +100,51 @@
                         $id++;
                     }
 
-                    echo "
-                <div class='buttonContainer'>
-                        <button class='buttonBlackA' id='genreButton'>";
-                    echo
-                    strtoupper($projectName);
-                    echo
-                    "</button>
-                <button class='buttonWhiteB' id='genreButton'>";
+                    if (basename($imageNames[0]) === "-link-page.php") {
+                        echo "
+                        <div class='buttonContainer'>
+                            <a href='";
+                            require $imageNames[0];
+                            echo
+                            "' target='_blank'>
+                                <button class='buttonBlackA'>";
+                        echo
+                        strtoupper($projectName);
+                        echo
+                        " ↗</button>
+                            </a>";
+                    } else {
+                        echo "
+                        <div class='buttonContainer'>
+                        <button class='buttonBlackA' id='genreButtonNoLink'>";
+                        echo
+                        strtoupper($projectName);
+                        echo
+                        "</button>";
+                    }
 
-                    echo strtoupper($genreName);
-
-                    echo
-                    "</button>
-                    <div class='infoButton'>";
-                    if (file_exists("$path/_link.php")) {
+                    if (basename($imageNames[1]) === "-link-project.php") {
                         echo
                         "<a href='";
-                        include "$path/_link.php";
+                        require $imageNames[1];
                         echo
                         "' target='_blank'>
-                            <button class='buttonWhiteB'>
-                            ↗
-                            </button>
-                        </a>";
+                            <button class='buttonWhiteB'>";
+                        echo strtoupper($genreName);
+                        echo
+                        " ↗</button>
+                        </a>
+                    </div>
+                </div>";
                     } else {
                         echo
-                        "<a href='' target='_blank'>
-                            <button class='buttonWhiteB' style='position: fixed; display: none; bottom: 100%;'>
-                            ↗
-                            </button>
-                        </a>";
-                    };
-                    echo
-                    "</div>
-                </div>
-            </div>";
-                    $id2++;
+                        "<button class='buttonWhiteB' id='genreButtonNoLink'>";
+                        echo strtoupper($genreName);
+                        echo
+                        "</button>
+                    </div>
+                </div>";
+                    }
                 }
             }
 

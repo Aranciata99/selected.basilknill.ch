@@ -3,15 +3,17 @@
 
 Weiter
 
+– Alle Bilder aller Projekte -> Azadi
+– Desktop hover auf Bild
 – fallback from basilknill.ch/pages
 – CV PDF
-– Alle Bilder aller Projekte
 – Links Testen
 
 Zusatz / Fehler
 
 – Besser dass es rechts nicht black wird?
 – Weisse Rand unten bei Bilder Mobile
+– Wenn ganz gesrollt automatisch neues aufklappen
 
 */
 
@@ -46,6 +48,7 @@ function getRandomArbitrary(min, max) {
 
 //Status
 let showAll = true;
+let ableScroll = false;
 
 //setup Image Layout
 
@@ -74,9 +77,9 @@ function setupDesktop() {
             }
         });
         projectButtonsContainer.forEach(btnBox => {
-            btnBox.style.top = "auto";
-            btnBox.style.bottom = 0 + "px";
-            projectButtonsContainer[i].style.opacity = 0;
+            btnBox.style.top = 25 + "px";
+            //btnBox.style.bottom = 25 + "px";
+            btnBox.style.opacity = 0;
         });
     });
 }
@@ -100,14 +103,14 @@ function setupMobile() {
             }
         });
 
-        let btnHeight = (squisedSize - 1) * projectAmmounts;
+        let btnHeight = 17;
 
         projectButtonsContainer.forEach(btnBox => {
-            btnBox.style.top = "auto";
+            btnBox.style.top = btnHeight + "px";
             btnBox.style.display = "none";
-            btnBox.style.bottom = 15 + btnHeight + "px";
-            projectButtonsContainer[i].style.opacity = 0;
-            btnHeight -= squisedSize + marginCoverlayout;
+            btnBox.style.opacity = 0;
+            btnHeight += squisedSize + marginCoverlayout;
+
         });
     });
 }
@@ -117,75 +120,23 @@ function setupMobile() {
 //Inputs
 
 genreImageContainer.forEach((container, i) => {
-    container.addEventListener("mouseover", function () {
-        if (!showAll) {
-            if (window.innerWidth < 900) {
-                header.style.opacity = 0.2;
-                header.style.pointerEvents = "none";
-            };
-            genreImageContainer.forEach((container, c) => {
-                if (c != i) {
-                    if (window.innerWidth > 900) {
-                        container.style.width = squisedSize + "px";
-                        container.scrollTo({
-                            left: 0,
-                            behavior: "smooth"
-                        });
-                    } else {
-                        container.style.height = squisedSize + "px";
-                        container.style.overflow = "hidden";
-                        container.scrollTo({
-                            top: 0,
-                            behavior: "smooth"
-                        });
-                        box = Array.from(container.children);
-                        box[0].style.height = 100 + "%";
-                    }
-                    projectButtonsContainer[c].style.opacity = 0;
-                    projectButtonsContainer[c].style.display = "none";
-                    infoButton[c].style.display = "none";
-                } else {
-                    projectButtonsContainer[i].style.opacity = 1;
-                    projectButtonsContainer[i].style.display = "block";
-                    infoButton[i].style.display = "block";
-                    if (window.innerWidth < 900) {
-                        box = Array.from(container.children);
-                        box[0].style.height = "auto";
-                    }
+    container.addEventListener("click", function () {
 
-                }
-            });
-            if (window.innerWidth > 900) {
-                container.style.width = activeSize + "px";
-                infoButton[i].style.left = (activeSize / 2) + (squisedSize * i) + "px";
-            } else {
-                container.style.height = activeSize + "px";
-                container.style.overflow = "auto";
-                infoButton[i].style.right = 40 + "px";
-            }
+        //console.log(container.getBoundingClientRect().height);
 
-            container.addEventListener("wheel", function (event) {
-                if (window.innerWidth > 900) {
-                    handleScroll(event, i);
-                }
-            });
-        }
-    });
-
-    container.addEventListener("mouseleave", function () {
-        if (showAll) {
+        if (container.getBoundingClientRect().height >= activeSize - 1 && window.innerWidth < 900) {
+            showAll = false;
+        } else if (container.getBoundingClientRect().width >= activeSize - 1 && window.innerWidth > 900) {
             showAll = false;
         }
-    });
 
-    container.addEventListener("click", function () {
         if (!showAll) {
-            showAll = true;
 
-            if (window.innerWidth < 900) {
-                header.style.opacity = 1;
-                header.style.pointerEvents = "all";
-            };
+            showAll = true;
+            ableScroll = false;
+
+            header.style.opacity = 1;
+            header.style.pointerEvents = "all";
 
             genreImageContainer.forEach((container, c) => {
                 if (window.innerWidth > 900) {
@@ -203,18 +154,22 @@ genreImageContainer.forEach((container, i) => {
                     setTimeout(() => {
                         container.style.overflow = "hidden";
                     }, 500);
-                    box = Array.from(container.children);
+                    let box = Array.from(container.children);
                     box[0].style.height = 100 + "%";
                 }
+                setTimeout(() => {
+                    projectButtonsContainer[i].style.display = "none";
+                }, 500);
                 projectButtonsContainer[i].style.opacity = 0;
-                projectButtonsContainer[i].style.display = "none";
             });
+
         } else {
-            showAll = false;
-            if (window.innerWidth < 900) {
-                header.style.opacity = 0.2;
-                header.style.pointerEvents = "none";
-            };
+
+            ableScroll = true;
+
+            header.style.opacity = 0;
+            header.style.pointerEvents = "none";
+
             genreImageContainer.forEach((container, c) => {
                 if (c != i) {
                     if (window.innerWidth > 900) {
@@ -222,14 +177,24 @@ genreImageContainer.forEach((container, i) => {
                             left: 0,
                             behavior: "smooth"
                         });
+                        projectButtonsContainer[c].style.opacity = 0;
+                        setTimeout(() => {
+                            projectButtonsContainer[c].style.display = "none";
+                            container.style.overflow = "hidden";
+                        }, 500);
                         container.style.width = squisedSize + "px";
-                        container.style.overflow = "hidden";
                     } else {
                         container.scrollTo({
                             top: 0,
                             behavior: "smooth"
                         });
+                        projectButtonsContainer[c].style.opacity = 0;
+                        setTimeout(() => {
+                            projectButtonsContainer[c].style.display = "none";
+                        }, 500);
                         container.style.height = squisedSize + "px";
+                        let box = Array.from(container.children);
+                        box[0].style.height = 100 + "%";
                     }
                 } else {
                     projectButtonsContainer[i].style.opacity = 1;
@@ -239,12 +204,12 @@ genreImageContainer.forEach((container, i) => {
             });
             if (window.innerWidth > 900) {
                 container.style.width = activeSize + "px";
-                infoButton[i].style.left = (activeSize / 2) + (squisedSize * i) + "px";
+                //infoButton[i].style.left = (activeSize / 2) + (squisedSize * i) + "px";
             } else {
                 container.style.height = activeSize + "px";
-                box = Array.from(container.children);
+                let box = Array.from(container.children);
                 box[0].style.height = "auto";
-                infoButton[i].style.right = 40 + "px";
+                //infoButton[i].style.right = 40 + "px";
             }
 
             container.addEventListener("wheel", function (event) {
@@ -259,7 +224,7 @@ genreImageContainer.forEach((container, i) => {
 
     function handleScroll(event, i) {
         event.preventDefault();
-        if (window.innerWidth >= 900 && !showAll) {
+        if (window.innerWidth >= 900 && ableScroll) {
             genreImageContainer[i].scrollLeft += event.deltaY + event.deltaX;
         }
     }
