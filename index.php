@@ -114,7 +114,7 @@
                         include "$path/_link.php";
                         echo
                         "' target='_blank'>
-                            <button class='buttonWhiteB' style='position: fixed;'>
+                            <button class='buttonWhiteB'>
                             MORE ↗
                             </button>
                         </a>";

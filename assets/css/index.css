@@ -233,6 +233,8 @@ input::-ms-thumb {
     left: 0;
     line-height: 1.7;
     z-index: 9999;
+    display: block;
+    flex-direction: column;
 }
 
 .buttonContainer {
@@ -244,15 +246,7 @@ input::-ms-thumb {
     transition: 0.6s ease;
 }
 
-.genreContainer {
-
-}
-
-.small {
-
-}
-
-.infoButton button{
+.infoButton button {
     bottom: var(--gridSize);
 }
 
@@ -292,7 +286,7 @@ input::-ms-thumb {
 .imageBox img {
     position: relative;
     width: auto;
-    height: 100%; 
+    height: 100%;
     object-fit: cover;
 }
 
@@ -309,7 +303,7 @@ input::-ms-thumb {
 #imageBox0 img {
     position: relative;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     object-fit: cover;
 }
 
@@ -339,9 +333,16 @@ input::-ms-thumb {
         padding-inline: 10px;
     }
 
+    /* Site */
+
+    .header {
+        display: flex;
+        flex-direction: column;
+    }
+
     .imageContainer {
         position: absolute;
-        white-space: nowrap;
+        white-space: normal;
         z-index: 0;
         top: 0;
         height: 100%;
@@ -357,19 +358,57 @@ input::-ms-thumb {
         overflow-y: auto;
         height: 12.5%;
         width: 100%;
+        margin-right: 0px;
+        margin-bottom: 3px;
     }
 
     .imageBox {
         position: relative;
         display: block;
-        width: 100%;
+        width: 80%;
         height: auto;
+        margin-inline: 0px;
+        margin-bottom: 100px;
+        height: auto;
+        box-shadow: 0px 0px 50px black;
     }
 
     .imageBox img {
         position: relative;
         width: 100%;
+        height: auto;
+    }
+
+    #imageBox0 {
+        position: relative;
+        display: inline-block;
+        margin-inline: 0;
+        width: 100%;
         height: 100%;
+        /* width: 100%; */
+        z-index: 100;
+    }
+
+    #imageBox0 img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .buttonContainer {
+        position: fixed;
+        padding-inline: var(--gridSize);
+        left: 0;
+        z-index: 9999;
+        width: 100%;
+        opacity: 0;
+        transition: 0.6s ease;
+    }
+
+    .infoButton button {
+        position: absolute;
+        bottom: 0;
     }
 
 }
