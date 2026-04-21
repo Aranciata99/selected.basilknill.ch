@@ -19,7 +19,7 @@
 
     <body>
 
-        <div class="header">
+        <div class="header" id="header">
 
             <?php
             $contactButtons = [
@@ -115,14 +115,14 @@
                         echo
                         "' target='_blank'>
                             <button class='buttonWhiteB'>
-                            MORE ↗
+                            ↗
                             </button>
                         </a>";
                     } else {
                         echo
                         "<a href='' target='_blank'>
                             <button class='buttonWhiteB' style='position: fixed; display: none; bottom: 100%;'>
-                            MORE ↗
+                            ↗
                             </button>
                         </a>";
                     };

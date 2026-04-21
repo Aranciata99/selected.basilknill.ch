@@ -3,9 +3,10 @@
 
 Weiter
 
-– Links testen + fallback from basilknill.ch/pages
+– fallback from basilknill.ch/pages
 – CV PDF
 – Alle Bilder aller Projekte
+– Links Testen
 
 Zusatz / Fehler
 
@@ -20,7 +21,7 @@ const projectButtons = document.querySelectorAll(".buttonContainer button");
 const projectButtonsContainer = document.querySelectorAll(".buttonContainer");
 const infoButton = document.querySelectorAll(".infoButton button");
 
-//console.log(infoButton);
+const header = document.getElementById("header");
 
 
 //Images
@@ -74,7 +75,7 @@ function setupDesktop() {
         });
         projectButtonsContainer.forEach(btnBox => {
             btnBox.style.top = "auto";
-            btnBox.style.bottom = 25 + "px";
+            btnBox.style.bottom = 0 + "px";
             projectButtonsContainer[i].style.opacity = 0;
         });
     });
@@ -118,6 +119,10 @@ function setupMobile() {
 genreImageContainer.forEach((container, i) => {
     container.addEventListener("mouseover", function () {
         if (!showAll) {
+            if (window.innerWidth < 900) {
+                header.style.opacity = 0.2;
+                header.style.pointerEvents = "none";
+            };
             genreImageContainer.forEach((container, c) => {
                 if (c != i) {
                     if (window.innerWidth > 900) {
@@ -176,6 +181,12 @@ genreImageContainer.forEach((container, i) => {
     container.addEventListener("click", function () {
         if (!showAll) {
             showAll = true;
+
+            if (window.innerWidth < 900) {
+                header.style.opacity = 1;
+                header.style.pointerEvents = "all";
+            };
+
             genreImageContainer.forEach((container, c) => {
                 if (window.innerWidth > 900) {
                     container.scrollTo({
@@ -200,6 +211,10 @@ genreImageContainer.forEach((container, i) => {
             });
         } else {
             showAll = false;
+            if (window.innerWidth < 900) {
+                header.style.opacity = 0.2;
+                header.style.pointerEvents = "none";
+            };
             genreImageContainer.forEach((container, c) => {
                 if (c != i) {
                     if (window.innerWidth > 900) {

@@ -247,7 +247,7 @@ input::-ms-thumb {
 }
 
 .infoButton button {
-    bottom: var(--gridSize);
+    bottom: 0;
 }
 
 .imageContainer {
@@ -410,5 +410,4 @@ input::-ms-thumb {
         position: absolute;
         bottom: 0;
     }
-
 }
