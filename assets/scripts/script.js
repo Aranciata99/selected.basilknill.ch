@@ -1,18 +1,8 @@
 
 /* 
 
-Weiter
+Zusatz
 
-– Alle Bilder aller Projekte -> Azadi
-– Desktop hover auf Bild
-– fallback from basilknill.ch/pages
-– CV PDF
-– Links Testen
-
-Zusatz / Fehler
-
-– Besser dass es rechts nicht black wird?
-– Weisse Rand unten bei Bilder Mobile
 – Wenn ganz gesrollt automatisch neues aufklappen
 
 */
@@ -28,10 +18,7 @@ const header = document.getElementById("header");
 
 //Images
 const genreImageContainer = document.querySelectorAll(".genreImageContainer");
-const imageContainers = document.querySelectorAll(".imageBox");
 
-let imageContainerWidth = imageContainers[0].getBoundingClientRect().width;
-let imageContainerHeight = imageContainers[0].getBoundingClientRect().height;
 let marginCoverlayout;
 let displayStyle = "block";
 
@@ -100,6 +87,8 @@ function setupMobile() {
         boxArray.forEach((box, index) => {
             if (index != 0) {
                 box.style.right = getRandomArbitrary(-2, -18) + "%";
+            } else {
+                console.log(box.getBoundingClientRect());
             }
         });
 
@@ -117,10 +106,14 @@ function setupMobile() {
 
 
 
-//Inputs
+//Input
+
+let currentlyOpenedWindow;
 
 genreImageContainer.forEach((container, i) => {
     container.addEventListener("click", function () {
+
+        currentlyOpenedWindow = i;
 
         //console.log(container.getBoundingClientRect().height);
 
@@ -153,7 +146,7 @@ genreImageContainer.forEach((container, i) => {
                     });
                     setTimeout(() => {
                         container.style.overflow = "hidden";
-                    }, 500);
+                    }, 750);
                     let box = Array.from(container.children);
                     box[0].style.height = 100 + "%";
                 }
@@ -181,8 +174,9 @@ genreImageContainer.forEach((container, i) => {
                         setTimeout(() => {
                             projectButtonsContainer[c].style.display = "none";
                             container.style.overflow = "hidden";
-                        }, 500);
+                        }, 750);
                         container.style.width = squisedSize + "px";
+                        //console.log(container);
                     } else {
                         container.scrollTo({
                             top: 0,
@@ -191,7 +185,8 @@ genreImageContainer.forEach((container, i) => {
                         projectButtonsContainer[c].style.opacity = 0;
                         setTimeout(() => {
                             projectButtonsContainer[c].style.display = "none";
-                        }, 500);
+                            container.style.overflow = "hidden";
+                        }, 750);
                         container.style.height = squisedSize + "px";
                         let box = Array.from(container.children);
                         box[0].style.height = 100 + "%";
@@ -200,6 +195,8 @@ genreImageContainer.forEach((container, i) => {
                     projectButtonsContainer[i].style.opacity = 1;
                     projectButtonsContainer[i].style.display = "block";
                     container.style.overflow = "auto";
+                    console.log(i);
+
                 }
             });
             if (window.innerWidth > 900) {
@@ -213,18 +210,21 @@ genreImageContainer.forEach((container, i) => {
             }
 
             container.addEventListener("wheel", function (event) {
-                if (window.innerWidth > 900) {
+                if (window.innerWidth > 900 && i == currentlyOpenedWindow) {
                     handleScroll(event, i);
                 }
             });
         }
     });
 
+    //console.log(i);
+
     //Horizontal scroll
 
     function handleScroll(event, i) {
         event.preventDefault();
         if (window.innerWidth >= 900 && ableScroll) {
+            //console.log("scroll" + i);
             genreImageContainer[i].scrollLeft += event.deltaY + event.deltaX;
         }
     }

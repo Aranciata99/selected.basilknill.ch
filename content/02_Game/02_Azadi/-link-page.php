@@ -1,1 +1,1 @@
-https://basilknill.ch/error
+https://basilknill.ch/azadi

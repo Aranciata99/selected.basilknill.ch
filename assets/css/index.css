@@ -110,7 +110,7 @@ p a:hover {
     font-size: 0.75rem;
     cursor: pointer;
     line-height: 0;
-    padding-top: 2px;
+    padding-top: 3px;
     margin-right: calc(var(--fixedGridSize)/6);
 
 }
@@ -308,6 +308,12 @@ input::-ms-thumb {
     width: 100%;
     height: 100vh;
     object-fit: cover;
+    transform: scale(1.015);
+    transition: var(--hoverSpeed);
+}
+
+#imageBox0 img:hover {
+    transform: scale(1);
 }
 
 #imageBox1 {
@@ -373,11 +379,11 @@ input::-ms-thumb {
         position: relative;
         display: block;
         width: 80%;
-        height: auto;
         margin-inline: 0px;
         margin-bottom: 100px;
         height: auto;
         box-shadow: 0px 0px 50px black;
+        line-height: 0;
     }
 
     .imageBox img {
@@ -405,6 +411,11 @@ input::-ms-thumb {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transform: scale(1);
+    }
+
+    #imageBox0 img:hover {
+        transform: scale(1);
     }
 
     .buttonContainer {

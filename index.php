@@ -26,13 +26,14 @@
                 // ["buttonBlackB", "buttonWhiteB"],
                 // ["_black", "_self"]
                 ["https://basilknill.ch/", "_blank", "buttonBlackA", "All Work"],
-                ["https://basilknill.ch/about", "_blank", "buttonBlackA", "Curriculum Vitae"],
+                ["assets/DE-Curriculum-Vitae-Basil-Knill.pdf", "_blank", "buttonBlackA", "CV DE"],
+                ["assets/EN-Curriculum-Vitae-Basil-Knill.pdf", "_blank", "buttonBlackA", "CV EN"],
                 ["mailto:basil@knill.eu", "_blank", "buttonBlackA", "basil@knill.eu"],
                 ["tel:+41787250698", "_blank", "buttonBlackA", "078 725 06 98"],
                 ["none", "none", "none", "none"],
                 ["https://github.com/Aranciata99", "_blank", "buttonWhiteB", "Github"],
                 ["https://www.instagram.com/basil.knill/", "_blank", "buttonWhiteB", "Instagram"],
-                ["https://vimeo.com/user84296841", "_blank", "buttonWhiteB", "Vimeo"],
+                ["https://vimeo.com/aranchiata", "_blank", "buttonWhiteB", "Vimeo"],
                 ["https://aranchiata.itch.io/", "_blank", "buttonWhiteB", "Itch.io"],
             ];
 
@@ -50,6 +51,7 @@
                     "</button>
                     </a>";
                 } else {
+                    
                     echo "<br>";
                 }
             }
@@ -95,7 +97,7 @@
                         $genre = basename($img);
 
                         echo "<div class='imageBox' id='imageBox$id'>
-                            <img src='$img' alt=''>
+                            <img src='$img' alt='Selected Work Image' loading='lazy'>
                         </div>";
                         $id++;
                     }

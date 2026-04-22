@@ -1,1 +1,1 @@
-https://basilknill.ch/error
+https://aranchiata.itch.io/azadi
